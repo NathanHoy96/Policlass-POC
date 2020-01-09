@@ -45,8 +45,6 @@ public class GetClassification extends AsyncTask<String,Void,String> {
             clientOutput.close();
             clientInput.close();
 
-
-
         } catch (IOException e) {
             e.printStackTrace();
         }
