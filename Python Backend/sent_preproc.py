@@ -29,7 +29,7 @@ def create_lexicon(left,right):
 	l2 = []
 	for w in w_counts:
 		#print(w_counts[w])
-		if 10000 > w_counts[w] > 500:
+		if 200000 > w_counts[w] > 200:
 			l2.append(w)
 	print(len(l2))
 	return l2
