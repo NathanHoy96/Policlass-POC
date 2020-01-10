@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Policlass-POC</string>
+    <string name="instructions">To classify an article and find alternatives. Use the share icon in your browser or news app and select this app from the Sharesheet</string>
 </resources>

@@ -1,7 +1,6 @@
 package com.example.policlass_poc;
 
 import android.os.AsyncTask;
-import android.text.LoginFilter;
 import android.util.Log;
 
 import java.io.BufferedReader;
@@ -19,13 +18,13 @@ public class GetClassification extends AsyncTask<String,Void,String> {
     private Socket socket;
     private PrintWriter clientOutput;
     private BufferedReader clientInput;
-    MainActivity main;
+    DisplayResult displayResult;
 
     private String response;
 
-    GetClassification(MainActivity m)
+    GetClassification(DisplayResult displayResult)
     {
-        this.main = m;
+        this.displayResult = displayResult;
     }
 
     @Override
@@ -53,7 +52,7 @@ public class GetClassification extends AsyncTask<String,Void,String> {
 
     @Override
     protected void onPostExecute(String s) {
-        main.asyncResult(s);
+        displayResult.asyncResult(s);
     }
 }
 
