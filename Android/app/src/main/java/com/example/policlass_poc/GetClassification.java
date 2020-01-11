@@ -14,7 +14,7 @@ import java.nio.charset.StandardCharsets;
 public class GetClassification extends AsyncTask<String,Void,String> {
 
     private int serverPort = 8000;
-    private String serverIP = "35.178.29.132";
+    private String serverIP = "52.56.96.103";
     private Socket socket;
     private PrintWriter clientOutput;
     private BufferedReader clientInput;

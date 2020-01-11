@@ -29,6 +29,12 @@ public class DisplayResult extends AppCompatActivity {
         alternativesList = new ArrayList<String>();
         arrayAdapter = new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_spinner_item,alternativesList);
 
+        alternativesList.add("https://www.bbc.co.uk/news/world-middle-east-51073621");
+        alternativesList.add("https://www.bbc.co.uk/news/uk-england-northamptonshire-51075235");
+        alternativesList.add("https://www.bbc.co.uk/news/uk-northern-ireland-51077397");
+
+        alternativesListView.setAdapter(arrayAdapter);
+
         Intent intent = getIntent();
         String action = intent.getAction();
         String type = intent.getType();
