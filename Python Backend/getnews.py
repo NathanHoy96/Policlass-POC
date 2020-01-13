@@ -8,7 +8,8 @@ def getNewsArticle(url):
     article = Article(url)
     article.download()
     article.parse()
-
+    content = article.text
+    print(content)
     title = str(article.title)
 
     #Find some of the keywords in the article we can use to search
@@ -45,5 +46,7 @@ def getNewsArticle(url):
     return alternatives    
 
     #Return URLs for classification
-
+keywords = []
 toclassify = getNewsArticle('https://news.sky.com/story/manchester-attacks-thugs-hunted-over-seven-robberies-in-two-hours-11901697')
+
+print(keywords)

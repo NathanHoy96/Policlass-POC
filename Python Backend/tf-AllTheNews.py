@@ -30,6 +30,7 @@ from imblearn.over_sampling import SMOTE
 print('Density')
 p = 0.4
 df = pd.read_csv('articles2.csv',header=None,skiprows=lambda i: 1>0 and random.random() > p)
+print(df)
 #First batch:
 print('First Batch')
 n_s_a = df[df[3] == 'Atlantic']

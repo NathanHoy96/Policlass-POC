@@ -5,11 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-
 import java.util.ArrayList;
+
 
 public class DisplayResult extends AppCompatActivity {
 
@@ -17,6 +18,7 @@ public class DisplayResult extends AppCompatActivity {
     private ListView alternativesListView;
     private ArrayList<String> alternativesList;
     private ArrayAdapter<String> arrayAdapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -28,10 +30,6 @@ public class DisplayResult extends AppCompatActivity {
         alternativesListView = findViewById(R.id.alternative_list);
         alternativesList = new ArrayList<String>();
         arrayAdapter = new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_spinner_item,alternativesList);
-
-        alternativesList.add("https://www.bbc.co.uk/news/world-middle-east-51073621");
-        alternativesList.add("https://www.bbc.co.uk/news/uk-england-northamptonshire-51075235");
-        alternativesList.add("https://www.bbc.co.uk/news/uk-northern-ireland-51077397");
 
         alternativesListView.setAdapter(arrayAdapter);
 
@@ -60,5 +58,26 @@ public class DisplayResult extends AppCompatActivity {
 
     void asyncResult(String result) {
         //This method is called when AsyncTask 'Get Classification' posts its result. Do you stuff here
+        String [] items = result.split(",");
+        for(int i = 0 ; i < items.length ;i++)
+        {
+            alternativesList.add(items[i]);
+        }
+
+        for(int j= 0; j < alternativesList.size() ; j++)
+        {
+            Log.i("List items",alternativesList.get(j)+"\n");
+        }
+
+        findViewById(R.id.progress_bar).setVisibility(View.GONE);
+        findViewById(R.id.progress_text).setVisibility(View.GONE);
+        classificationText.setText(alternativesList.get(0).toUpperCase());
+        alternativesList.remove(0);
+        updateView();
+    }
+
+    private void updateView()
+    {
+        arrayAdapter.notifyDataSetChanged();
     }
 }

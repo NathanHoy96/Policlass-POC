@@ -6,17 +6,28 @@
     android:layout_height="match_parent"
     tools:context=".DisplayResult">
 
+    <ProgressBar
+        android:layout_width="132dp"
+        android:layout_height="94dp"
+        android:indeterminate="true"
+        android:id="@+id/progress_bar"
+        app:layout_constraintBottom_toTopOf="@+id/alternative_list"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
+        android:id="@+id/classification_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/classification_text"
-        android:text="Class"
         android:textAlignment="center"
         android:textSize="60dp"
         app:layout_constraintBottom_toTopOf="@+id/alternative_list"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"></TextView>
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.503"></TextView>
 
     <ListView
         android:id="@+id/alternative_list"
@@ -25,5 +36,16 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"></ListView>
+
+    <TextView
+        android:id="@+id/progress_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Analysing your article to find alternatives..."
+        app:layout_constraintBottom_toTopOf="@+id/alternative_list"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.786" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
