@@ -20,12 +20,6 @@
             android:scaleType="centerCrop"
             android:src="#88888888"/>
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_gravity="bottom"
-            android:src="@drawable/gradient"/>
-
         <TextView
             android:id="@+id/textView"
             android:layout_width="match_parent"
