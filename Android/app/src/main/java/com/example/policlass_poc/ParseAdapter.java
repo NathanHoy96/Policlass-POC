@@ -1,7 +1,9 @@
 package com.example.policlass_poc;
 
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,12 +62,18 @@ public class ParseAdapter extends RecyclerView.Adapter<ParseAdapter.ViewHolder> 
         public void onClick(View view) {
             int position = getAdapterPosition();
             ParseItem parseItem = parseItems.get(position);
+            String urlString = parseItem.getDetailUrl();
 
-            //Intent intent = new Intent(context, DetailActivity.class);
-            //intent.putExtra("title", parseItem.getTitle());
-            //intent.putExtra("image", parseItem.getImgUrl());
-            //intent.putExtra("detailUrl", parseItem.getDetailUrl());
-            //context.startActivity(intent);
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(urlString));
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.setPackage("com.android.chrome");
+            try {
+                context.startActivity(intent);
+            } catch (ActivityNotFoundException ex) {
+                // Chrome browser presumably not installed and open Kindle Browser
+                intent.setPackage("com.amazon.cloud9");
+                context.startActivity(intent);
+            }
         }
     }
 }

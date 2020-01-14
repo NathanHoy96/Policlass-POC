@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -81,7 +82,9 @@ public class DisplayResult extends AppCompatActivity {
 
         findViewById(R.id.progress_bar).setVisibility(View.GONE);
         findViewById(R.id.progress_text).setVisibility(View.GONE);
-        classificationText.setText(alternativesList.get(0).toUpperCase());
+
+        classificationText.setText("Your article was classed as "+ alternativesList.get(0) + " wing");
+
         alternativesList.remove(0);
         updateView();
     }
@@ -97,6 +100,7 @@ public class DisplayResult extends AppCompatActivity {
     private class Content extends AsyncTask<Void, Void, Void> {
 
 
+
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
@@ -106,41 +110,32 @@ public class DisplayResult extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... voids) {
 
-            try {
-                String url = "https://www.cinemaqatar.com/";
+            for (int i = 0 ; i < alternativesList.size(); i++)
+            {
+                try {
+                    String url = alternativesList.get(i);
+                    Document doc = Jsoup.connect(url).get();
 
-                Document doc = Jsoup.connect(url).get();
+                    Elements data = doc.select("head");
+                    int size = data.size();
+                    Log.d("doc", "doc: " + doc);
+                    Log.d("data", "data: " + data);
+                    Log.d("size", "" + size);
+                    for (int j = 0; j< size; j++) {
+                        String imgUrl = String.valueOf(data.select("meta[property=og:image]").attr("content"));
 
-                Elements data = doc.select("span.thumbnail");
-                int size = data.size();
-                Log.d("doc", "doc: " + doc);
-                Log.d("data", "data: " + data);
-                Log.d("size", "" + size);
-                for (int i = 0; i < size; i++) {
-                    String imgUrl = data.select("span.thumbnail")
-                            .select("img")
-                            .eq(i)
-                            .attr("src");
+                        String title = String.valueOf(data.select("meta[property=og:title]").attr("content"));
 
-                    String title = data.select("h4.gridminfotitle")
-                            .select("span")
-                            .eq(i)
-                            .text();
+                        String detailUrl = String.valueOf(data.select("meta[property=og:url]").attr("content"));
 
-                    String detailUrl = data.select("h4.gridminfotitle")
-                            .select("a")
-                            .eq(i)
-                            .attr("href");
+                        parseItems.add(new ParseItem(imgUrl, title, detailUrl));
+                        Log.d("items", "img: " + imgUrl + " . title: " + title);
+                    }
 
-                    parseItems.add(new ParseItem(imgUrl, title, detailUrl));
-                    Log.d("items", "img: " + imgUrl + " . title: " + title);
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
-
-            } catch (IOException e) {
-                e.printStackTrace();
             }
-
-
             return null;
         }
     }
